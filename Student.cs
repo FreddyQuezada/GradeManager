@@ -2,35 +2,45 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace GradeManager
 {
     internal class Student
     {
-        public string studentID;
-        public string studentName;
+        public string studentID { get; set; }
+        public string studentName { get; set; }
 
-        public Student(string studentID, string studentName)
+        public List<double> grades { get; set; }
+
+        // Constructor
+        public Student(string matricula, string nombre)
         {
-            this.studentID = studentID;
-            this.studentName = studentName;
+            studentID = matricula;
+            studentName = nombre;
+            grades = new List<double>();
         }
 
-
-
-        public void ValidStudent()
+        // Agregar calificación
+        public bool AddGrade(double grade)
         {
+            if (grade < 0 || grade > 100)
+            {
+                return false;
+            }
 
+            grades.Add(grade);
+            return true;
         }
 
-        
+        // Calcular promedio
+        public double GetAverage()
+        {
+            if (grades.Count == 0)
+            {
+                return 0;
+            }
 
-        public void ShowGrades(){
-            Console.WriteLine("Showing grades");
+            return grades.Average();
         }
-
     }
-
-
-
-
 }
